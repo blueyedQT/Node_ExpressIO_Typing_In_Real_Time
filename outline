@@ -32,7 +32,7 @@
 		var users = {};
 
 
-	3. To the person when sent this request, we EMIT an event called 'existing_users' with all the users data.
+	3. To the person who sent this request, we EMIT an event called 'existing_users' with all the users data.
 
 		app.io.route('got_a_new_user', function(req) {
 			app.io.broadcast('new_user', {new_user_name: req.data.name});

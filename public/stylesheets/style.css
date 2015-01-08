@@ -1,8 +1,18 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+.user {
+	height: 200px;
+	width: 200px;
+	margin: 10px;
+	background-color: lightblue;
+	color: blue;
+	border: 2px solid black;
+	border-radius: 10px;
+	display: inline-block;
 }
-
-a {
-  color: #00B7FF;
+h2 {
+	background-color: black;
+	color: white;
+	text-align: center;
+	margin-top: 0;
+	padding: 5px;
+	border-radius: 5px 5px 0 0;
 }
