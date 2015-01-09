@@ -6,18 +6,33 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script>
-    	$(document).ready(function(){
-			var user_name = prompt('What is your name?');
+    	$(document).ready(function (){
+        var user_name = prompt('What is your name?');
 		    io = io.connect();
-			io.emit('got_new_user', {name: user_name});
-			io.on('exisiting_users', function(data){
-				for(var i=0; i<data.length-1; i++){
-					$('#content').append('<div class="user"><h2>'+data[i]+'</h2></div>');
-				}
-			});
-			io.on('new_user', function(data){
-				$('#content').append('<div class="user"><h2>'+data+'</h2></div>');
-			});
+        io.emit('got_new_user', {name: user_name});
+        io.on('exisiting_users', function (data){
+          for(var i=0; i<data.length-1; i++){
+            $('#content').append('<div id="'+data[i].count+'" class="user"><h2>'+data[i].name+'</h2></div>');
+          }
+        });
+  			io.on('new_user', function (data){
+          console.log(data);
+          $('#content').append(
+              '<div id="'+data.count+'" class="user">'+
+                '<h2>'+data.name+'</h2>'+
+                '<input type="text" id="my_box">'+
+                '<button class="btn">Say</button>'+
+                '</div>');
+        });
+        io.on('user_disconnected', function (data) {
+          $('#'+data).hide();
+          $('body').append('A user has left');
+        });
+
+        $("#my_box").click(function(){
+          alert("The paragraph was clicked.");
+        });
+
 		})
     </script>
   </head>
