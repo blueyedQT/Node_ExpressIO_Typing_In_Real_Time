@@ -16,17 +16,15 @@ module.exports = function Route(app){
 		count++
 		req.io.emit('exisiting_users', users);
 	});
-	// app.io.route('disconnect', function(req){
-	// 	console.log(req);
-	// 	for(var i=0; i<users.length; i++) {
-	// 		var object = users[i];
-	// 		if(object.id === req.session.count) {
-	// 			users.splice(i, 1);
-	// 			app.io.broadcast('user_disconnected', req.session.count);
-	// 			console.log('disconnected', req.session.count);
-	// 		}
-	// 		console.log(req.session);
-	// 	}
-	// 	req.session.destroy();
-	// });
+	app.io.route('disconnect', function(res){
+		for(var i=0; i<users.length; i++) {
+			var object = users[i];
+			if(object.count === res.session.count) {
+				console.log(object);
+				users.splice(i, 1);
+				app.io.broadcast('disconnect_user', res.session.count);
+			}
+		}
+		res.session.destroy();
+	});
 }

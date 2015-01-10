@@ -13,25 +13,25 @@
         io.on('exisiting_users', function (data){
           for(var i=0; i<data.length; i++){
             $('#content').append(
-                '<div id="'+data[i].count+'" class="user">'+
+                '<div class="user '+data[i].count+'">'+
                   '<h2>'+data[i].name+'</h2>'+
                 '</div>');
           }
         });
   			io.on('new_user', function (data){
           $('#content').append(
-              '<div id="'+data.count+'" class="user">'+
+              '<div class="user '+data.count+'">'+
                 '<h2>'+data.name+'</h2>'+
               '</div>');
         });
-        io.on('user_disconnected', function (data) {
-          $('#'+data).hide();
-          $('body').append('A user has left');
+        io.on('disconnect_user', function (data) {
+          $("div."+data).fadeOut();
+          $('body').append('<p>A user has left</p>');
         });
 
-        $("#my_box").click(function(){
-          alert("The paragraph was clicked.");
-        });
+        // $('#'+data).mouseenter(function(){
+        //   alert('You hovered over me!');
+        // });
 
 		})
     </script>
