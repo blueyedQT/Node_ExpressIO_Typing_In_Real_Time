@@ -25,8 +25,8 @@
               '</div>');
         });
         io.on('disconnect_user', function (data) {
-          $("div."+data).fadeOut();
-          $('body').append('<p>A user has left</p>');
+          $("div."+data.count).fadeOut();
+          $('body').append('<p>'+data.name+' has left.</p>');
         });
 
         // $('#'+data).mouseenter(function(){

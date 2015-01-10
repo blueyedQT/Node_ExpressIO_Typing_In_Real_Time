@@ -21,8 +21,8 @@ module.exports = function Route(app){
 			var object = users[i];
 			if(object.count === res.session.count) {
 				console.log(object);
+				app.io.broadcast('disconnect_user', object);
 				users.splice(i, 1);
-				app.io.broadcast('disconnect_user', res.session.count);
 			}
 		}
 		res.session.destroy();
