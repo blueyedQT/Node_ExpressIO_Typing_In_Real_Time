@@ -27,7 +27,7 @@
 			app.io.broadcast('new_user', {new_user_name: req.data.name});
 		});
 
-	2. We store the nbame/session_id of the new user in a variable/array/hash called 'users'
+	2. We store the name/session_id of the new user in a variable/array/hash called 'users'
 
 		var users = {};
 
