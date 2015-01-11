@@ -11,29 +11,42 @@
 		    io = io.connect();
         io.emit('got_new_user', {name: user_name});
         io.on('exisiting_users', function (data){
-          for(var i=0; i<data.length; i++){
+          for(var i=0; i<data.length-1; i++){
             $('#content').append(
                 '<div class="user '+data[i].count+'">'+
                   '<h2>'+data[i].name+'</h2>'+
+                  '<p class="'+data[i].count+'"></p>'+
                 '</div>');
           }
+        });
+        io.on('current_user', function (data){
+           $('#content').append(
+              '<div class="user current_user">'+
+                '<h2>'+data.name+'</h2>'+
+                '<p>'+
+                  '<textarea id="my_box"></textarea>'+
+                  '<input class="button" type="submit" value="Enter">'+
+                '</p>'+
+              '</div>');
+           $('.button').click(function(){
+              io.emit('updated_text', {text: $("#my_box").val()});
+            });
         });
   			io.on('new_user', function (data){
           $('#content').append(
               '<div class="user '+data.count+'">'+
                 '<h2>'+data.name+'</h2>'+
+                '<p class="'+data.count+'"></p>'+
               '</div>');
         });
-        io.on('disconnect_user', function (data) {
-          $("div."+data.count).fadeOut();
-          $('body').append('<p>'+data.name+' has left.</p>');
+        io.on('text_update', function (data){
+          $('p.'+data.count).hide().html(data.text).fadeIn();
         });
-
-        // $('#'+data).mouseenter(function(){
-        //   alert('You hovered over me!');
-        // });
-
-		})
+        io.on('disconnect_user', function (data){
+          $('div.'+data.count).fadeOut();
+          $('body').append('<p class="left">'+data.name+' has left.</p>');
+        });
+		});
     </script>
   </head>
   <body>

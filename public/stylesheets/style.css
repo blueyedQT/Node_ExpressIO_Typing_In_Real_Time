@@ -17,3 +17,16 @@ h2 {
 	padding: 5px;
 	border-radius: 5px 5px 0 0;
 }
+p {
+	padding: 5px 20px 20px 20px;
+	color: black;
+}
+#my_box {
+	background-color: white;
+	height: 100px;
+	width: 150px;
+}
+p.left {
+	color: red;
+	padding: 2px 0px 0px 20px;
+}
