@@ -25,10 +25,9 @@
                 '<h2>'+data.name+'</h2>'+
                 '<p>'+
                   '<textarea id="my_box"></textarea>'+
-                  '<input class="button" type="submit" value="Enter">'+
                 '</p>'+
               '</div>');
-           $('.button').click(function(){
+           $('textarea').on('keyup', function(){
               io.emit('updated_text', {text: $("#my_box").val()});
             });
         });
@@ -40,7 +39,7 @@
               '</div>');
         });
         io.on('text_update', function (data){
-          $('p.'+data.count).hide().html(data.text).fadeIn();
+          $('p.'+data.count).html(data.text);
         });
         io.on('disconnect_user', function (data){
           $('div.'+data.count).fadeOut();

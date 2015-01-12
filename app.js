@@ -6,9 +6,6 @@ app.configure(function(){
     app.use(express.cookieParser());
     app.use(express.json());
     app.use(express.urlencoded());
-    // Testing //
-    // app.use(express.bodyParser());
-    // End Testing //
     app.use(express.static(path.join(__dirname, 'public')));
     app.use(express.session({secret: 'monkey'}));
     app.set('view engine', 'ejs');
